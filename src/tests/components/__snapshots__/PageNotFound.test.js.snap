@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Return DahBoardPage 1`] = `
+<div>
+  Error 404: Page Not Found! 
+  <Link
+    replace={false}
+    to="/"
+  >
+    Homepage
+  </Link>
+</div>
+`;

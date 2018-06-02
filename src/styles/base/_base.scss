@@ -1,0 +1,23 @@
+html {
+    font-size: 62.5%; //since 1rem = 16px, 16*0.625=10
+}
+body {
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: $m-size; //with the new sizing, we get font-size = 1.6*10=16px
+}
+
+button {
+    cursor: pointer;
+}
+
+button:disabled {
+    cursor: default;
+}
+
+.is-active {
+    font-weight: bold;
+}
+
+*, *:before, *:after {
+    box-sizing: border-box;
+}
