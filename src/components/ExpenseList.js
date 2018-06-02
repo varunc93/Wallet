@@ -11,7 +11,7 @@ export const ExpenseList = (props) => ( //Export required for testing to isolate
             ):
             (
                 props.expenses.map((expense) => {
-            return <ExpenseListItem key={expense.id} {...expense}/>
+                    return <ExpenseListItem key={expense.id} {...expense} />;
             }))
         }
     </div>

@@ -4,12 +4,12 @@ import {AddExpensePage} from '../../components/AddExpensePage';
 import expenses from '../fixtures/expenses';
 import toJSON from 'enzyme-to-json';
 
-let addExpense, history, wrapper;
+let startAddExpense, history, wrapper;
 
 beforeEach(() => {
-    addExpense = jest.fn();
+    startAddExpense = jest.fn();
     history = {push: jest.fn()};
-    wrapper = shallow(<AddExpensePage  addExpense={addExpense} history={history}/>);
+    wrapper = shallow(<AddExpensePage  startAddExpense={startAddExpense} history={history}/>);
 });
 
 test("Render AddExpense Correctly", () => {
@@ -19,6 +19,6 @@ test("Render AddExpense Correctly", () => {
 test("Handle AddExpense onSubmit", () => {
     wrapper.find('ExpenseForm').prop('onSubmit')(expenses[2]);
     expect(history.push).toHaveBeenLastCalledWith("/");
-    expect(addExpense).toHaveBeenLastCalledWith(expenses[2]);
+    expect(startAddExpense).toHaveBeenLastCalledWith(expenses[2]);
     expect(toJSON(wrapper)).toMatchSnapshot();
 });
