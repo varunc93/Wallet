@@ -90,25 +90,25 @@ test("should add expense to database and store", (done) => {
     });
 });
 
-test("Should set up expense object with data from firebase", () => {
+test('should setup set expense action object with data', () => {
     const action = setExpenses(expenses);
     expect(action).toEqual({
-        type: "SET_EXPENSES",
-        expenses
+      type: 'SET_EXPENSES',
+      expenses
     });
-});
-
-test("Should fetch the expenses from firebase",() => {
+  });
+  
+  test('should fetch the expenses from firebase', (done) => {
     const store = createMockStore({});
-    store.dispatch(startExpenses()).then(() => {
-        const actions = store.getActions();
-        expect(actions[0]).toEqual({
-            type: "SET_EXPENSES",
-            expenses
-        });
-        done();
+    store.dispatch(startSetExpenses()).then(() => {
+      const actions = store.getActions();
+      expect(actions[0]).toEqual({
+        type: 'SET_EXPENSES',
+        expenses
+      });
+      done();
     });
-});
+  });
 
 // test("should setup add expense object default",() => {
 //     const expenseData = {description: '123', text: 'text', amount: 10000, createdAt: 12345};
