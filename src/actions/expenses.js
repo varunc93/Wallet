@@ -48,6 +48,14 @@ export const editExpense = (id, updates) => ({   //another way of passing id
     updates
 });
 
+export const startEditExpense = (id, updates) => {
+    return(dispatch) => { //dispatch is passed so that we have access to it below
+        return database.ref(`expenses/${id}`).update(updates).then(() => {
+            dispatch(editExpense(id, updates));
+        });
+    }
+}
+
 export const setExpenses = (expenses) => ({
     type: 'SET_EXPENSES',
     expenses
