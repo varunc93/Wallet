@@ -8,7 +8,7 @@ const expenseReducer = (state = expenseReducerDefault, action) => {
             return [...state, action.expense];                //Using spread operator does not change the existing array.
         case "REMOVE_EXPENSE":
             return state.filter(({id}) =>  id !== action.id);
-        case 'EDIT_EXPENSE':
+        case "EDIT_EXPENSE":
             return state.map((expense) => {
                 if (expense.id === action.id) {
                     return {
@@ -19,6 +19,8 @@ const expenseReducer = (state = expenseReducerDefault, action) => {
                     return expense;
                 }
             });
+        case "SET_EXPENSES":
+            return action.expenses;
         default: return state;
     }
 };

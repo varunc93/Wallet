@@ -39,3 +39,10 @@ export const editExpense = (id, updates) => ({   //another way of passing id
     id,
     updates
 });
+
+export const setExpenses = (expenses) => ({
+    type: "SET_EXPENSES",
+    expense
+});
+
+//export const startSetExpenses;
