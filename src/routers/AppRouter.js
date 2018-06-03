@@ -9,7 +9,7 @@ import Header from '../components/Header';
 import LoginPage from '../components/LoginPage';
 import createHistory from 'history/createBrowserHistory';
 
-const history = createHistory();
+export const history = createHistory();
 
 const AppRouter = () => (    //exact allows it to match the route exactly otherwise "/create" will return html for both "/" and "/create"
     <Router history={history}>
