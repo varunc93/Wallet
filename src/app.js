@@ -23,5 +23,5 @@ const jsx = (
 ReactDOM.render(<p>Loading... </p>, document.querySelector(".app"));
 
 store.dispatch(startSetExpenses()).then(() => {
-    RenderDOM.render(jsx, document.querySelector(".app"));
+    ReactDOM.render(jsx, document.querySelector(".app"));
 });

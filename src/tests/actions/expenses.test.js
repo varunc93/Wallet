@@ -106,6 +106,7 @@ test("Should fetch the expenses from firebase",() => {
             type: "SET_EXPENSES",
             expenses
         });
+        done();
     });
 });
 
