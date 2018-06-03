@@ -20,7 +20,7 @@ export const startAddExpense = (expenseData = {}) => {  //This returning of a fu
         } = expenseData; //another way of declaring default values
         const expense = {description, text, amount, createdAt};
 
-        return database.ref('expense').push(expense).then((ref) => { //data is returned for promise chaining in the test case
+        return database.ref('expenses').push(expense).then((ref) => { //data is returned for promise chaining in the test case
             dispatch(addExpense({
                 id: ref.key,
                 ...expense
