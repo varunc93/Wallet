@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import AppRouter, {history} from './routers/AppRouter';
 import configureStore from './store/configureStore';
 import { startSetExpenses } from './actions/expenses';
-import { setTextFilter } from './actions/filters';
+import { login, logout } from './actions/auth';
 import getVisibleExpenses from './selectors/expenses';
 import 'normalize.css/normalize.css';
 import './styles/styles.scss';
@@ -30,17 +30,18 @@ const renderApp = () => {
 ReactDOM.render(<p>Loading...</p>, document.querySelector('.app'));
 
 
-firebase.auth().onAuthStateChanged((user) => {
-	if(user){
+firebase.auth().onAuthStateChanged((user) => { //we pass the uid here itself to handle the implicit case when user is logged in, i.e, whenever the user is already logged in and revisits tha application.
+	if (user) {
+		store.dispatch(login(user.uid));
 		store.dispatch(startSetExpenses()).then(() => {
 			renderApp();
-			if(history.location.pathname === "/"){
-				history.push("/dashboard");
+			if (history.location.pathname === '/') {
+		  		history.push('/dashboard');
 			}
-		});
-	}
-	else {
-		renderApp();
-		history.push("/");
+	  	});
+	} else {
+		store.dispatch(logout());
+	  	renderApp();
+	  	history.push('/');
 	}
 });
