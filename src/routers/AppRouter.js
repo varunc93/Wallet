@@ -4,23 +4,21 @@ import createHistory from 'history/createBrowserHistory';
 import AddExpensePage from '../components/AddExpensePage';
 import DashboardPage from '../components/DashboardPage';
 import EditExpensePage from '../components/EditExpensePage';
-import HelpPage from '../components/HelpPage';
 import PageNotFound from '../components/PageNotFound';
-import Header from '../components/Header';
 import LoginPage from '../components/LoginPage';
+import PrivateRoute from './PrivateRoute';
+import PublicRoute from './PublicRoute';
 
 export const history = createHistory();
 
 const AppRouter = () => (    //exact allows it to match the route exactly otherwise "/create" will return html for both "/" and "/create"
     <Router history={history}>
         <div>
-            <Header />
             <Switch>
-                <Route path="/" component={LoginPage} exact={true} />
-                <Route path="/dashboard" component={DashboardPage} />
-                <Route path="/create" component={AddExpensePage} />
-                <Route path="/edit/:id" component={EditExpensePage} />
-                <Route path="/help" component={HelpPage} />
+                <PublicRoute path="/" component={LoginPage} exact={true} />
+                <PrivateRoute path="/dashboard" component={DashboardPage} />
+                <PrivateRoute path="/create" component={AddExpensePage} />
+                <PrivateRoute path="/edit/:id" component={EditExpensePage} />
                 <Route component={PageNotFound} />
             </Switch>
         </div>
