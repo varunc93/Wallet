@@ -38,17 +38,13 @@ firebase.auth().onAuthStateChanged((user) => {
 		store.dispatch(login(user.uid));
 		store.dispatch(startSetExpenses()).then(() => {
 			renderApp();
-			console.log("Before if");
 			if (history.location.pathname === '/') {
 				history.push('/dashboard');
-				console.log("After if");
 			}
 		});
 	} else {
-		console.log("Else before render");
 		store.dispatch(logout());
 		renderApp();
-		console.log("Else after render");
 		history.push('/');
 	}
 });
