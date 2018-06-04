@@ -11,7 +11,8 @@ export const addExpense = (expense) => ({
 });
 
 export const startAddExpense = (expenseData = {}) => {  //This returning of a function is allowed since we used middleware thunk,else we have to return an object
-    return (dispatch) => {
+    return (dispatch, getState) => {
+        const uid = getState().auth.uid;
         const {
             description = '',
             text = '',
@@ -20,7 +21,7 @@ export const startAddExpense = (expenseData = {}) => {  //This returning of a fu
         } = expenseData; //another way of declaring default values
         const expense = {description, text, amount, createdAt};
 
-        return database.ref('expenses').push(expense).then((ref) => { //data is returned for promise chaining in the test case
+        return database.ref(`users/${uid}/expenses`).push(expense).then((ref) => { //data is returned for promise chaining in the test case
             dispatch(addExpense({
                 id: ref.key,
                 ...expense
@@ -35,8 +36,9 @@ export const removeExpense = ({id} = {}) => ({
 });
 
 export const startRemoveExpense = ({id} = {}) => {
-    return (dispatch) => {
-        return database.ref(`expenses/${id}`).remove().then(() => {
+    return (dispatch, getState) => {
+        const uid = getState().auth.uid;
+        return database.ref(`users/${uid}/expenses/${id}`).remove().then(() => {
             dispatch(removeExpense({id}));
         });
     }
@@ -49,8 +51,9 @@ export const editExpense = (id, updates) => ({   //another way of passing id
 });
 
 export const startEditExpense = (id, updates) => {
-    return(dispatch) => { //dispatch is passed so that we have access to it below
-        return database.ref(`expenses/${id}`).update(updates).then(() => {
+    return(dispatch, getState) => { //dispatch is passed so that we have access to it below
+        const uid = getState().auth.uid;
+        return database.ref(`users/${uid}/expenses/${id}`).update(updates).then(() => {
             dispatch(editExpense(id, updates));
         });
     }
@@ -62,8 +65,9 @@ export const setExpenses = (expenses) => ({
 });
 
 export const startSetExpenses = () => {
-    return (dispatch) => {
-        return database.ref('expenses').once('value').then((snapshot) => {
+    return (dispatch, getState) => {
+        const uid = getState().auth.uid;
+        return database.ref(`users/${uid}/expenses`).once('value').then((snapshot) => {
             const expenses = [];
 
             snapshot.forEach((childSnapshot) => {

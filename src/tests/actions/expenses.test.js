@@ -4,6 +4,7 @@ import {startAddExpense, addExpense, removeExpense, startRemoveExpense, editExpe
 import expenses from "../fixtures/expenses";
 import database from '../../firebase/firebase';
 
+const uid = "123abc";
 const createMockStore = configureMockStore([thunk]);
 
 beforeEach(() => {
@@ -11,7 +12,7 @@ beforeEach(() => {
     expenses.forEach(({id, description, text, amount, createdAt}) => {
         expenses[id] = {description, note, amount, createdAt};
     });
-    database.ref('expenses').set(expensesData).then(() => done());
+    database.ref(`users/${uid}/expenses`).set(expensesData).then(() => done());
 });
 
 test("should setup remove expense object", () => {
@@ -24,7 +25,7 @@ test("should setup remove expense object", () => {
 
 
 test("should remove expense from firebase", (done) => {
-    const store = createMockStore({});
+    const store = createMockStore({auth: {uid}});
     const id = expenses[2].id;
     store.dispatch(startRemoveExpense({id})).then(() => {
         const actions = store.getActions();
@@ -32,7 +33,7 @@ test("should remove expense from firebase", (done) => {
             type: "REMOVE_EXPENSE",
             id
         });
-        return database.ref(`expenses/${id}`).once(value);
+        return database.ref(`users/${uid}/expenses/${id}`).once(value);
     }).then((snapshot) => {
         expect(snapshot.val()).toBeFalsy();
         done();
@@ -51,7 +52,7 @@ test("should setup edit expense object", () => {
 });
 
 test("should edit expense from firebase", () => {
-    const store = createMockStore({});
+    const store = createMockStore({auth: {uid}});
     const id = expense[0].id;
     const updates = {amount: 21000};
     store.dispatch(startEditExpense(id, updates)).then(() => {
@@ -61,7 +62,7 @@ test("should edit expense from firebase", () => {
             id,
             updates
         });
-        return database.ref(`expenses/${id}`).once('value');
+        return database.ref(`users/${uid}/expenses/${id}`).once('value');
     }).then((snapshot) => {
         expect(snapshot.val().amount).toBe(updates.amount);
         done();
@@ -77,7 +78,7 @@ test("should setup add expense object default",() => {
 });
 
 test("should add expense to database and store", (done) => {//done is used for asynchronous functions to make jest wait till done is called to pass/fail the test case.
-    const store = createMockStore({});//jest by default doesn't wait for asynchronous and will run as is.
+    const store = createMockStore({auth: {uid}});//jest by default doesn't wait for asynchronous and will run as is.
     const expenseData = {
         description: "Mouse",
         amount: 3000,
@@ -93,7 +94,7 @@ test("should add expense to database and store", (done) => {//done is used for a
                 ...expenseData
             }
         });
-        return database.ref(`expense/${action[0].expense.id}`).once('value');
+        return database.ref(`users/${uid}/expense/${action[0].expense.id}`).once('value');
     }).then((snapshot) =>{
         expect(snapshot.val()).toEqual(expenseData);
         done();
@@ -102,7 +103,7 @@ test("should add expense to database and store", (done) => {//done is used for a
 
 
 test("should add expense to database and store", (done) => {
-    const store = createMockStore({});
+    const store = createMockStore({auth: {uid}});
     const expenseDefault = {
         description: "",
         amount: 0,
@@ -118,7 +119,7 @@ test("should add expense to database and store", (done) => {
                 ...expenseDefault
             }
         });
-        return database.ref(`expense/${action[0].expense.id}`).once('value');
+        return database.ref(`users/${uid}/expense/${action[0].expense.id}`).once('value');
     }).then((snapshot) =>{
         expect(snapshot.val()).toEqual(expenseDefault);
         done();
