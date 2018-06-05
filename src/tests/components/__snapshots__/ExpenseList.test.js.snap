@@ -1,38 +1,92 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Render ExpenseList 1`] = `
-<div>
-  <ExpenseListItem
-    amount={500}
-    createdAt={0}
-    description="A"
-    id="1"
-    key="1"
-    text="Atext"
-  />
-  <ExpenseListItem
-    amount={100}
-    createdAt={-345600000}
-    description="B"
-    id="2"
-    key="2"
-    text="Btext"
-  />
-  <ExpenseListItem
-    amount={1000}
-    createdAt={345600000}
-    description="C"
-    id="3"
-    key="3"
-    text="Ctext"
-  />
+<div
+  className="content-container"
+>
+  <div
+    className="list-header"
+  >
+    <div
+      className="show-for-mobile"
+    >
+      Expenses
+    </div>
+    <div
+      className="show-for-desktop"
+    >
+      Expense
+    </div>
+    <div
+      className="show-for-desktop"
+    >
+      Amount
+    </div>
+  </div>
+  <div
+    className="list-body"
+  >
+    <ExpenseListItem
+      amount={500}
+      createdAt={0}
+      description="A"
+      id="1"
+      key="1"
+      text="Atext"
+    />
+    <ExpenseListItem
+      amount={100}
+      createdAt={-345600000}
+      description="B"
+      id="2"
+      key="2"
+      text="Btext"
+    />
+    <ExpenseListItem
+      amount={1000}
+      createdAt={345600000}
+      description="C"
+      id="3"
+      key="3"
+      text="Ctext"
+    />
+  </div>
 </div>
 `;
 
 exports[`Render ExpenseList without expenses 1`] = `
-<div>
-  <p>
-    There are no expenses to show!
-  </p>
+<div
+  className="content-container"
+>
+  <div
+    className="list-header"
+  >
+    <div
+      className="show-for-mobile"
+    >
+      Expenses
+    </div>
+    <div
+      className="show-for-desktop"
+    >
+      Expense
+    </div>
+    <div
+      className="show-for-desktop"
+    >
+      Amount
+    </div>
+  </div>
+  <div
+    className="list-body"
+  >
+    <div
+      className="list-item list-item--message"
+    >
+      <span>
+        There are no expenses to show!
+      </span>
+    </div>
+  </div>
 </div>
 `;
