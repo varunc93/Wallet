@@ -75,25 +75,26 @@ export default class ExpenseForm extends React.Component {
         }
     };
 
+    //Button is placed inside a div to prevent it from being a direct descendant.
     render () {
         return (
-            <div>
-                {this.state.error && <p>{this.state.error}</p>}
-                <form onSubmit={this.onSubmit}>
-                    <input type="text" placeholder="Description" autoFocus value={this.state.description} onChange={this.handleDescription}/>
-                    <input type="text" placeholder="Amount" value= {this.state.amount} onChange={this.handleAmount}/>
-                    <textarea placeholder="Add a note..." value={this.state.text} onChange={this.handleText}></textarea>
-                    <SingleDatePicker
-                        date={this.state.createdAt}
-                        onDateChange={this.onDateChange}
-                        focused={this.state.focused}
-                        onFocusChange={this.onFocusChange}
-                        numberOfMonths={1}
-                        isOutsideRange={() => false}
+            <form className="form" onSubmit={this.onSubmit}>
+                {this.state.error && <p className="form__error">{this.state.error}</p>}
+                <input className="text-input" type="text" placeholder="Description" autoFocus value={this.state.description} onChange={this.handleDescription}/>
+                <input className="text-input" type="text" placeholder="Amount" value= {this.state.amount} onChange={this.handleAmount}/>
+                <textarea className="textarea" placeholder="Add a note..." value={this.state.text} onChange={this.handleText}></textarea>
+                <SingleDatePicker
+                    date={this.state.createdAt}
+                    onDateChange={this.onDateChange}
+                    focused={this.state.focused}
+                    onFocusChange={this.onFocusChange}
+                    numberOfMonths={1}
+                    isOutsideRange={() => false}
                 />
-                    <button>Submit</button>
-                </form>
-            </div>
+                <div>
+                    <button className="button">Save Expense</button>
+                </div>
+            </form>
         )
     };
 

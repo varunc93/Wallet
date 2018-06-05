@@ -8,9 +8,14 @@ export const ExpenseSummary = ({expenseCount, expensesTotal}) => {
     const expenseWord = expenseCount === 1 ? "expense" : "expenses";
     const formattedExpense = numeral(expensesTotal/100).format("$0,0.00");
     return (
-    <div>
-        <h1>Viewing a total of {formattedExpense} for {expenseCount} {expenseWord}. </h1>
-    </div>
+        <div className="page-header">
+            <div className="content-container">
+                <h1 className="page_header__title">Viewing a total of <span>{formattedExpense}</span> for <span>{expenseCount}</span> {expenseWord}. </h1>
+                <div className="page-header__actions">
+                    <Link className="button" to="/create">Add New Expense</Link>
+                </div>
+            </div>
+        </div>
     )
 };
 

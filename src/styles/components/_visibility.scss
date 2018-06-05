@@ -1,0 +1,11 @@
+.show-for-mobile {
+    @media (min-width: $desktop-breakpoint){ //If display width is greater than min-width then display becomes none
+        display: none;
+    }
+}
+
+.show-for-desktop {
+    @media(max-width: $desktop-breakpoint - .01rem){ //-.01rem to prevent both from occurring at the same time
+        display: none;
+    }
+}

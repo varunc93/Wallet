@@ -1,9 +1,15 @@
+*, *:before, *:after {
+    box-sizing: border-box;
+}
+
 html {
     font-size: 62.5%; //since 1rem = 16px, 16*0.625=10
 }
 body {
+    color: $dark-grey;
     font-family: Helvetica, Arial, sans-serif;
     font-size: $m-size; //with the new sizing, we get font-size = 1.6*10=16px
+    line-height: 1.6;
 }
 
 button {
@@ -16,8 +22,4 @@ button:disabled {
 
 .is-active {
     font-weight: bold;
-}
-
-*, *:before, *:after {
-    box-sizing: border-box;
 }
