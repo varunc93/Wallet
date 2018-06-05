@@ -15,12 +15,12 @@ import numeral from 'numeral';
 //Same as
 const ExpenseListItem = ({id, description, amount, createdAt}) => {
     return (
-    <Link className="list-item" to={`/edit/${id}`}>
+     <Link className="list-item" to={`/edit/${id}`}>
         <div>
             <h3 className="list-item__title">{description}</h3>
-            <span className="list-item__sub-title">{moment(createdAt).format("MMMM Do, YYYY")}</span>
+            <span className="list-item__sub-title">{moment(createdAt).format('MMMM Do, YYYY')}</span>
         </div>
-        <h3 className="list-item__data">{numeral(amount/100).format('$0,0.00')}</h3>
+        <h3 className="list-item__data">{numeral(amount / 100).format('$0,0.00')}</h3>
     </Link>
 )};
 

@@ -3,8 +3,9 @@
 }
 
 html {
-    font-size: 62.5%; //since 1rem = 16px, 16*0.625=10
+    font-size: 62.5%;
 }
+
 body {
     color: $dark-grey;
     font-family: Helvetica, Arial, sans-serif;
@@ -23,3 +24,4 @@ button:disabled {
 .is-active {
     font-weight: bold;
 }
+

@@ -4,7 +4,14 @@
     color: $grey;
     display: flex;
     justify-content: space-between;
-    padding: $m-size;
+    padding: $s-size $m-size;
+}
+
+.list-body {
+    margin-bottom: $m-size;
+    @media (min-width: $desktop-breakpoint) {
+      margin-bottom: $l-size;
+    }
 }
 
 .list-item {
@@ -16,14 +23,14 @@
     padding: $s-size;
     text-decoration: none;
     transition: background .3s ease;
-    &:hover{ //Same as adding .list-item:hover {} at the bottom
-        background: $off-white;
+    &:hover { //Same as adding .list-item:hover {} at the bottom
+      background: $off-white;
     }
     @media (min-width: $desktop-breakpoint) {
-        align-items: center;
-        flex-direction: row;
-        justify-content: space-between;
-        padding: $m-size;
+      align-items: center;
+      flex-direction: row;
+      justify-content: space-between;
+      padding: $m-size;
     }
 }
 
@@ -33,7 +40,7 @@
     justify-content: center;
     padding: $m-size;
     &:hover {
-        background: none;
+      background: none;
     }
 }
 
@@ -42,22 +49,15 @@
     word-break: break-all;
 }
 
-.list-item__sub-title {
+  .list-item__sub-title {
     color: $grey;
     font-size: $font-size-small;
 }
 
-.list-body {
-    margin-bottom: $m-size;
-    @media (min-width: $desktop-breakpoint){
-        margin-bottom: $l-size;
-    }
-}
-
 .list-item__data {
     margin: $s-size 0 0 0;
-    @media (min-width: $desktop-breakpoint){
-        margin: 0;
-        padding-left: $s-size;
+    @media (min-width: $desktop-breakpoint) {
+      margin: 0;
+      padding-left: $s-size;
     }
 }

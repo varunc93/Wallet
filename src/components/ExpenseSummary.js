@@ -9,11 +9,11 @@ export const ExpenseSummary = ({expenseCount, expensesTotal}) => {
     const expenseWord = expenseCount === 1 ? "expense" : "expenses";
     const formattedExpense = numeral(expensesTotal/100).format("$0,0.00");
     return (
-        <div className="page-header">
+          <div className="page-header">
             <div className="content-container">
-                <h1 className="page_header__title">Viewing a total of <span>{formattedExpense}</span> for <span>{expenseCount}</span> {expenseWord}. </h1>
+                <h1 className="page-header__title">Viewing <span>{expenseCount}</span> {expenseWord} totalling <span>{formattedExpensesTotal}</span></h1>
                 <div className="page-header__actions">
-                    <Link className="button" to="/create">Add New Expense</Link>
+                <Link className="button" to="/create">Add Expense</Link>
                 </div>
             </div>
         </div>
