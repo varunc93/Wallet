@@ -13,7 +13,7 @@ exports[`Handle date changes ExpenseFilters 1`] = `
       <input
         className="text-input"
         onChange={[Function]}
-        placeholder="Search Expenses"
+        placeholder="Search expenses"
         type="text"
         value=""
       />
@@ -153,7 +153,7 @@ exports[`Handle date focus changes ExpenseFilters 1`] = `
       <input
         className="text-input"
         onChange={[Function]}
-        placeholder="Search Expenses"
+        placeholder="Search expenses"
         type="text"
         value=""
       />
@@ -293,7 +293,7 @@ exports[`Handle texts for ExpenseFilters 1`] = `
       <input
         className="text-input"
         onChange={[Function]}
-        placeholder="Search Expenses"
+        placeholder="Search expenses"
         type="text"
         value=""
       />
@@ -433,7 +433,7 @@ exports[`Render ExpenseFilters snapshot 1`] = `
       <input
         className="text-input"
         onChange={[Function]}
-        placeholder="Search Expenses"
+        placeholder="Search expenses"
         type="text"
         value=""
       />
@@ -573,7 +573,7 @@ exports[`Render ExpenseFilters with alternate data 1`] = `
       <input
         className="text-input"
         onChange={[Function]}
-        placeholder="Search Expenses"
+        placeholder="Search expenses"
         type="text"
         value="text"
       />
@@ -713,7 +713,7 @@ exports[`Sort by amount ExpenseFilters 1`] = `
       <input
         className="text-input"
         onChange={[Function]}
-        placeholder="Search Expenses"
+        placeholder="Search expenses"
         type="text"
         value="text"
       />
@@ -853,7 +853,7 @@ exports[`Sort by date ExpenseFilters 1`] = `
       <input
         className="text-input"
         onChange={[Function]}
-        placeholder="Search Expenses"
+        placeholder="Search expenses"
         type="text"
         value="text"
       />

@@ -8,19 +8,18 @@ exports[`ExpenseSummary should render 1 expense correctly 1`] = `
     className="content-container"
   >
     <h1
-      className="page_header__title"
+      className="page-header__title"
     >
-      Viewing a total of 
-      <span>
-        $2.35
-      </span>
-       for 
+      Viewing 
       <span>
         1
       </span>
        
       expense
-      . 
+       totalling 
+      <span>
+        $2.35
+      </span>
     </h1>
     <div
       className="page-header__actions"
@@ -30,7 +29,7 @@ exports[`ExpenseSummary should render 1 expense correctly 1`] = `
         replace={false}
         to="/create"
       >
-        Add New Expense
+        Add Expense
       </Link>
     </div>
   </div>
@@ -45,19 +44,18 @@ exports[`ExpenseSummary should render multiple expenses correctly 1`] = `
     className="content-container"
   >
     <h1
-      className="page_header__title"
+      className="page-header__title"
     >
-      Viewing a total of 
-      <span>
-        $103,923.89
-      </span>
-       for 
+      Viewing 
       <span>
         4
       </span>
        
       expenses
-      . 
+       totalling 
+      <span>
+        $103,923.89
+      </span>
     </h1>
     <div
       className="page-header__actions"
@@ -67,7 +65,7 @@ exports[`ExpenseSummary should render multiple expenses correctly 1`] = `
         replace={false}
         to="/create"
       >
-        Add New Expense
+        Add Expense
       </Link>
     </div>
   </div>

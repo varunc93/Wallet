@@ -84,7 +84,7 @@ exports[`Render ExpenseList without expenses 1`] = `
       className="list-item list-item--message"
     >
       <span>
-        There are no expenses to show!
+        No expenses
       </span>
     </div>
   </div>
