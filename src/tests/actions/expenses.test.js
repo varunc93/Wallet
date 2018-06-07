@@ -7,19 +7,19 @@ import database from '../../firebase/firebase';
 const uid = "123abc";
 const createMockStore = configureMockStore([thunk]);
 
-beforeEach(() => {
+beforeEach((done) => {
     const expensesData = {};
     expenses.forEach(({id, description, text, amount, createdAt}) => {
-        expenses[id] = {description, note, amount, createdAt};
+        expenses[id] = {description, text, amount, createdAt};
     });
     database.ref(`users/${uid}/expenses`).set(expensesData).then(() => done());
 });
 
 test("should setup remove expense object", () => {
-    const action = removeExpense({id: '123abc'});
+    const action = removeExpense(expenses[0].id);
     expect(action).toEqual({
         type: "REMOVE_EXPENSE",
-        id: '123abc'
+        id: expenses[0].id
     }); //toBe uses === to compare and that will fail for objects
 });
 
@@ -27,13 +27,13 @@ test("should setup remove expense object", () => {
 test("should remove expense from firebase", (done) => {
     const store = createMockStore({auth: {uid}});
     const id = expenses[2].id;
-    store.dispatch(startRemoveExpense({id})).then(() => {
+    store.dispatch(startRemoveExpense(id)).then(() => {
         const actions = store.getActions();
         expect(actions[0]).toEqual({
             type: "REMOVE_EXPENSE",
             id
         });
-        return database.ref(`users/${uid}/expenses/${id}`).once(value);
+        return database.ref(`users/${uid}/expenses/${id}`).once('value' );
     }).then((snapshot) => {
         expect(snapshot.val()).toBeFalsy();
         done();
@@ -41,19 +41,19 @@ test("should remove expense from firebase", (done) => {
 });
 
 test("should setup edit expense object", () => {
-    const action = editExpense('123abc', { text: 'New note'});
+    const action = editExpense(expenses[1].id, { text: 'New note'});
     expect(action).toEqual({
         type: "EDIT_EXPENSE",
-        id: '123abc',
+        id: expenses[1].id,
         updates: {
             text: "New note"
         }
     });
 });
 
-test("should edit expense from firebase", () => {
+test("should edit expense from firebase", (done) => {
     const store = createMockStore({auth: {uid}});
-    const id = expense[0].id;
+    const id = expenses[0].id;
     const updates = {amount: 21000};
     store.dispatch(startEditExpense(id, updates)).then(() => {
         const actions = store.getActions();
@@ -136,7 +136,7 @@ test('should setup set expense action object with data', () => {
 });
 
 test('should fetch the expenses from firebase', (done) => {
-    const store = createMockStore({});
+    const store = createMockStore({auth: {uid}});
     store.dispatch(startSetExpenses()).then(() => {
       const actions = store.getActions();
       expect(actions[0]).toEqual({
