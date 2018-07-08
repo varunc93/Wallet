@@ -5,29 +5,30 @@ import expenses from "../fixtures/expenses";
 import database from '../../firebase/firebase';
 
 const uid = "123abc";
+const defaultAuthState = { auth: { uid } };
 const createMockStore = configureMockStore([thunk]);
 
 beforeEach((done) => {
     const expensesData = {};
     expenses.forEach(({id, description, text, amount, createdAt}) => {
-        expenses[id] = {description, text, amount, createdAt};
+        expensesData[id] = {description, text, amount, createdAt};
     });
     database.ref(`users/${uid}/expenses`).set(expensesData).then(() => done());
 });
 
 test("should setup remove expense object", () => {
-    const action = removeExpense(expenses[0].id);
+    const action = removeExpense({id: "123abc"});
     expect(action).toEqual({
         type: "REMOVE_EXPENSE",
-        id: expenses[0].id
+        id: "123abc"
     }); //toBe uses === to compare and that will fail for objects
 });
 
 
 test("should remove expense from firebase", (done) => {
-    const store = createMockStore({auth: {uid}});
+    const store = createMockStore(defaultAuthState);
     const id = expenses[2].id;
-    store.dispatch(startRemoveExpense(id)).then(() => {
+    store.dispatch(startRemoveExpense({id})).then(() => {
         const actions = store.getActions();
         expect(actions[0]).toEqual({
             type: "REMOVE_EXPENSE",
@@ -52,7 +53,7 @@ test("should setup edit expense object", () => {
 });
 
 test("should edit expense from firebase", (done) => {
-    const store = createMockStore({auth: {uid}});
+    const store = createMockStore(defaultAuthState);
     const id = expenses[0].id;
     const updates = {amount: 21000};
     store.dispatch(startEditExpense(id, updates)).then(() => {
@@ -78,7 +79,7 @@ test("should setup add expense object default",() => {
 });
 
 test("should add expense to database and store", (done) => {//done is used for asynchronous functions to make jest wait till done is called to pass/fail the test case.
-    const store = createMockStore({auth: {uid}});//jest by default doesn't wait for asynchronous and will run as is.
+    const store = createMockStore(defaultAuthState);//jest by default doesn't wait for asynchronous and will run as is.
     const expenseData = {
         description: "Mouse",
         amount: 3000,
@@ -94,7 +95,7 @@ test("should add expense to database and store", (done) => {//done is used for a
                 ...expenseData
             }
         });
-        return database.ref(`users/${uid}/expense/${action[0].expense.id}`).once('value');
+        return database.ref(`users/${uid}/expenses/${action[0].expense.id}`).once('value');
     }).then((snapshot) =>{
         expect(snapshot.val()).toEqual(expenseData);
         done();
@@ -103,7 +104,7 @@ test("should add expense to database and store", (done) => {//done is used for a
 
 
 test("should add expense to database and store", (done) => {
-    const store = createMockStore({auth: {uid}});
+    const store = createMockStore(defaultAuthState);
     const expenseDefault = {
         description: "",
         amount: 0,
@@ -119,7 +120,7 @@ test("should add expense to database and store", (done) => {
                 ...expenseDefault
             }
         });
-        return database.ref(`users/${uid}/expense/${action[0].expense.id}`).once('value');
+        return database.ref(`users/${uid}/expenses/${action[0].expense.id}`).once('value');
     }).then((snapshot) =>{
         expect(snapshot.val()).toEqual(expenseDefault);
         done();
@@ -136,7 +137,7 @@ test('should setup set expense action object with data', () => {
 });
 
 test('should fetch the expenses from firebase', (done) => {
-    const store = createMockStore({auth: {uid}});
+    const store = createMockStore(defaultAuthState);
     store.dispatch(startSetExpenses()).then(() => {
       const actions = store.getActions();
       expect(actions[0]).toEqual({
