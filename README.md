@@ -10,8 +10,8 @@ The application is hosted on heroku.
 
 <h1>Running the application</h1>
 <ul>
-  <li>Clone the github repository https://github.com/varunc93/Eventify</li>
+  <li>Clone the github repository https://github.com/varunc93/Wallet/</li>
   <li>Run npm install or yarn install</li>
-  <li>Demo can be found on https://eventify-418a8.firebaseapp.com/events</li>
+  <li>Demo can be found on https://walletvc.herokuapp.com/</li>
 </ul>
 
